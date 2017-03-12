@@ -8,3 +8,4 @@ build*/
 # Synopsys simulation files
 *.vcd
 *.saif
+ucli.key
