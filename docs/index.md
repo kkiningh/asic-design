@@ -1,4 +1,4 @@
-A short introduction to ASIC Design
+A Short Introduction to ASIC Design
 ===
 
 Introduction to the ASIC design flow
@@ -30,4 +30,4 @@ More Resources
 
  - Plug Synopsys office hours
  - Link to userguides
- - Lint to ece5745
+ - Link to ece5745
