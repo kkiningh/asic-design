@@ -6,15 +6,15 @@ Introduction to the ASIC design flow
 
 Talk about how to use this tutorial
 
-Lessions
+Lessons
 ---
 
- - Lession 0: Introduction to ASIC design flow
- - Lession 1: Simulating RTL
- - Lession 2: RTL Synthesis
- - Lession 3: Place and Route
- - Lession 4: Gate Level Simulation
- - Lession 5: Estimating Timing and Power consumption
+ - Lesson 0: Introduction to ASIC design flow
+ - Lesson 1: Simulating RTL
+ - Lesson 2: RTL Synthesis
+ - Lesson 3: Place and Route
+ - Lesson 4: Gate Level Simulation
+ - Lesson 5: Estimating Timing and Power consumption
 
 In Depth Tutorials
 ---
