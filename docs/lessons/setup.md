@@ -5,7 +5,7 @@ Setting up the Synopsys toolchain on Corn
 ---
 
 In this course, we use the Synopsys EDA toolsuite for simulation, synthesis, and place and route.
-These tools widely used in industry, but they are also propriatary and very expensive.
+These tools are widely used in industry, but they are also propriatary and very expensive.
 Fortunately, Stanford has bought educational licenses you can use for this course.
 
 The easiest way to access the Synopsys toolchain at Stanford is through
