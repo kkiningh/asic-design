@@ -1,6 +1,11 @@
 Tutorial 1 - Verilog
 ===
 
+Table Of Contents
+---
+* TOC
+{:toc}
+
 Introduction To Verilog
 ---
 Verilog is a widely used "Hardware Description Language" (HDL).
