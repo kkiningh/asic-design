@@ -1,2 +1,7 @@
 title: ASIC Design
+description: Introduction To ASIC Design
 google_analytics: UA-93559920-1
+
+gems:
+    - jekyll-sitemap
+    - jekyll-seo-tag
