@@ -1,19 +1,21 @@
-A Short Introduction to ASIC Design
+Introduction to ASIC Design
 ===
 
 Lessons
 ---
 
- - Lesson 0: Setup and the ASIC design flow
- - Lesson 1: Introduction to Verilog
- - Lesson 2: RTL Synthesis
- - Lesson 3: Place and Route
- - Lesson 4: Gate Level Simulation
- - Lesson 5: Estimating Timing and Power consumption
+ - Lesson 0: [Setup and the ASIC design flow](lessons/lession0-setup.md)
+ - Lesson 1: [Introduction to Verilog](lessons/lession1-verilog.md)
+ - Lesson 2: [Synthesis](lessons/lession2-syntheis.md)
+ - Lesson 3: Place and route
+ - Lesson 4: Gate level simulation
+ - Lesson 5: Estimating timing and power
+ - Lesson 6: SoC design and interconnects
 
-In Depth Tutorials
+Tool Guides
 ---
 
+ - Synopsys Reference Design Methodology
  - Synopsys VCS
  - Synopsys DC
  - Synopsys ICC
