@@ -5,12 +5,13 @@ Lessons
 ---
 
  - Lesson 0: [Setup and the ASIC design flow](lessons/lesson0-setup.md)
- - Lesson 1: [Introduction to Verilog](lessons/lesson1-verilog.md)
+ - Lesson 1: [Introduction to Verilog](lessons/verilog.md)
  - Lesson 2: [Synthesis](lessons/lesson2-syntheis.md)
  - Lesson 3: Place and route
  - Lesson 4: Gate level simulation
  - Lesson 5: Estimating timing and power
  - Lesson 6: SoC design and interconnects
+ - Lesson 7: Design for test
 
 Tool Guides
 ---
