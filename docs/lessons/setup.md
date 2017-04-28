@@ -1,14 +1,19 @@
-Setup
-===
-
-Setting up the Synopsys toolchain on Corn
+----
+title: Lession 0: Tools and Setup
+author: Kevin Kiningham
+layout: default
 ---
 
-In this course, we use the Synopsys EDA toolsuite for simulation, synthesis, and place and route.
-These tools are widely used in industry, but they are also propriatary and very expensive.
-Fortunately, Stanford has bought educational licenses you can use for this course.
+Running the Synopsys toolchain on corn
+---
 
-The easiest way to access the Synopsys toolchain at Stanford is through
+In this course, we use the Synopsys EDA toolsuite for simulation, synthesis,
+and place and route. These tools are widely used in industry, but are also
+propriatary and very expensive. Fortunately, Stanford has several licenses
+students can use for educational purposes.
+
+For Stanford students not associated with a research group, the easiest way to
+access the Synopsys toolchain at Stanford is through
 [corn](https://web.stanford.edu/group/farmshare/cgi-bin/wiki/index.php/Main_Page#corn_info).
 Login to corn by opening a terminal and typing the following:
 
@@ -25,73 +30,110 @@ source $MODULESHOME/init/bash.in
 module load base
 ```
 
-Now we can load the specific tool we're interested in. For example, to load VCS
-(the Synopsys Verilog simulator), Design Compiler (the Synopsys synthesis tool),
-and ICC (the Synopsys palce and route tool) run the following commands:
+Now we can load the specific tool we're interested in running. For example, to
+load VCS (the Synopsys Verilog simulator) run the following command:
 
 ```bash
 module load vcs
-module load syn
-module load icc
 ```
 
-Note that multiple tools can loaded at once without issue. To see a list of all avalible
-modules type:
-
-```bash
-module avail
-```
-
-#### Automatically loading Synopsys tools on login ####
-
-You can also load the tools automatically on login. First clone the
-[stanford-synopsys-setup](https://github.com/kkiningh/stanford-synopsys-setup)
-repo by running the following command:
-
-```bash
-git clone git@github.com/stanford-synopsys-setup
-```
-
-This repo contains several scripts used to setup the Synopsys toolchain and
-libraries. Next, you'll need to add the setup script to your `.bashrc` by
-running:
-
-```bash
-echo "source `pwd`/stanford-synopsys-setup/setup.sh" >> ~/.bashrc
-```
-
-Now, logout and log back in to corn. Check that the Synopsys toolchain has
-loaded by running:
+You can see a list of currently loaded modules by running:
 
 ```bash
 module list
 ```
 
+To see a list of all avalible modules, run:
+
+```bash
+module avail
+```
+
+Note that multiple tools can loaded at the same time without issue.
+
+As a final note, it can occasionally be useful to access the tools directly
+without using the module system. The tools themselves are located in the folder
+`/afs/ir.stanford.edu/class/ee/synopsys/<TOOL_NAME>/<TOOL_VERSION>/`.
+
 (Optional) Setting Up the Synopsys toolchain locally
 ---
 
 If you're on the Stanford network, you can also run the tools locally. This has
-the advantange of being significanly faster (if you have a fast computer!) but
-can be much harder to setup.
+the advantange of potentially being faster but can be more difficult to setup.
+Note that this will only work if you are using a compatible operating system
+such as Red Hat Enterprise Linux or CentOS (although other versions of Linux
+may also work, see below).
 
-### Setup OpenAFS ###
+### Setup Kerberos and OpenAFS ###
 
-To access AFS on a personal computer, install OpenAFS.
+First, install an AFS client for your platform. On Ubuntu 16.10, you can
+install openafs by running
 
-Set it up like the following:
+```bash
+sudo apt-get install openafs-krb5 openafs-client krb5-user module-assistant openafs-modules-dkms
+```
 
-TODO
+When prompted, enter the cell as `ir.stanford.edu` and the cache size as needed
+(a size of 512000 is reasonable).
 
-The toolchain is located at `/afs/ir.stanford.edu/class/ee/synopsys/`
+Next, we'll need to setup Kerberos. Run the following commands
 
-### Installing Dependencies ###
+```bash
+cd /etc
+mv krb5.conf krb5.conf.old
+curl -O http://web.stanford.edu/dept/its/support/kerberos/dist/krb5.conf
+```
 
-TODO
+Finally, checkout a Kerberos ticket and obtain an AFS token by running the following.
+Enter your Stanford password when prompted.
 
-(Optional) Using open source tools
+```bash
+kinit
+aklog
+```
+
+You should now be able to access the tool folder at `/afs/ir.stanford.edu/class/ee/synopsys/`.
+
+### Compatibilty Setup for Ubuntu ###
 ---
 
-As another alternative, for simulation and synthesis it is also possible to use open source tools.
+Unfortunately, Ubuntu is not offically supported by the Synopsys tools.
+However, it is possible to run the tools anyway. Note that these instructions
+have only been tested with Ubuntu 16.04. They may not work for other versions
+or operating systems.
 
-See iverilog, verilator, yosys
+First create a symlink from `/usr/class` to `/afs/ir.stanford.edu/class/`.
 
+```bash
+ln -s /usr/class /afs/ir.stanford.edu/class
+```
+
+Next, some of the tools rely on outdated library versions. We can workaround
+this by creating a symlink to the correct library and adding it to the dynamic
+library search path.
+
+```bash
+mkdir -p $HOME/.local/lib
+ln -s $HOME/.local/lib/libjpeg.so.62 /usr/lib/x86_64-linux-gnu/libjpeg.so.8.0.2
+ln -s $HOME/.local/lib/libmng.so.1 /usr/lib/x86_64-linux-gnu/libmng.so.2.0.2
+ln -s $HOME/.local/lib/libncurses.so.5 /lib/x86_64-linux-gnu/libncurses.so.5
+ln -s $HOME/.local/lib/libtiff.so.3 /usr/lib/x86_64-linux-gnu/libtiff.so.5.2.4
+export $LD_LIBRARY_PATH:$HOME/.local/lib/
+```
+
+Some tools also attempt to autodetect the current platform and term type.
+Override this by setting:
+
+```bash
+export ARCH_OVERRIDE=linux
+export TERM=xterm+256color
+```
+
+Some tools expect that `/bin/sh` is symlinked to `bash` instead of `dash` (Ubuntu default).
+Change this by running:
+
+```bash
+sudo dpkg-reconfigure dash
+```
+
+You should now be able to run the tools normally.
